@@ -204,6 +204,29 @@
 				capacity: 40
 			}
 		];
+
+		this.population = [
+			{
+				name: "Peasant",
+				count: 0,
+				taxRate: 1
+			},
+			{
+				name: "Citizen",
+				count: 0,
+				taxRate: 5
+			},
+			{
+				name: "Patrician",
+				count: 0,
+				taxRate: 20
+			},
+			{
+				name: "Nobleman",
+				count: 0,
+				taxRate: 50
+			}
+		];
 	})
 
 })();
