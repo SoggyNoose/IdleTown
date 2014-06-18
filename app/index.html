@@ -38,14 +38,15 @@
       <div class="col-md-12">
         <h3>Buildings</h3>
         <div ng-controller="BuildingController as buildingCtrl">
-          <div ng-repeat="building in buildingCtrl.buildings">
+          <div ng-repeat="building in buildingCtrl.productionBuildings">
             <div class="section building">
               <h4>{{building.name}} - {{building.description}}</h4>
               Count: {{building.count}}
               <br>
               <progressbar max="building.outputTime" value="building.progress"></progressbar>
               <br>
-              <button type="button" class="btn btn-primary" ng-click="buildingCtrl.buyBuilding(building)" ng-show="buildingCtrl.canAfford(building)">Buy</button>
+              <button type="button" class="btn btn-primary" ng-click="buildingCtrl.buyBuilding(building)" ng-disabled="!buildingCtrl.canAfford(building)">
+                {{buildingCtrl.costAsString(building)}}</button>
             </div>
           </div>
         </div>

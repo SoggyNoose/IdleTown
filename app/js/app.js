@@ -9,7 +9,7 @@
 	}]);
 
 	app.controller('BuildingController', ['buildingService', 'resourceService', function(buildingService, resourceService) {
-		this.buildings = buildingService.buildings;
+		this.productionBuildings = buildingService.productionBuildings;
 
 		this.canAfford = function(building) {
 			for (var resource in building.cost) {
@@ -30,8 +30,18 @@
 				resourceService.removeResource(resourceIndex, building.cost[resource]);
 			}
 
-			this.buildings[buildingIndex].count++;
+			this.productionBuildings[buildingIndex].count++;
 		}
+
+		this.costAsString = function(building) {
+			var result = "";
+			for (var type in building.cost) {
+				result += building.cost[type] + " " + type + ", ";
+			}
+			result = result.slice(0, -2);
+
+			return result;
+		};
 
 		
 	}]);
@@ -39,8 +49,8 @@
 	app.controller('GameLoopController', ['$scope', '$timeout', 'resourceService', 'buildingService', function($scope, $timeout, resourceService, buildingService) {
 		
 		$scope.produceResources = function() {
-			for (var index = 0; index < buildingService.buildings.length; index++) {
-				var building = buildingService.buildings[index];
+			for (var index = 0; index < buildingService.productionBuildings.length; index++) {
+				var building = buildingService.productionBuildings[index];
 				if (building.count === 0) {
 					continue;
 				}
@@ -58,8 +68,22 @@
 			}
 		}
 
+		$scope.buildingMaintenance = function() {
+			for (var index = 0; index < buildingService.productionBuildings.length; index++) {
+				var building = buildingService.productionBuildings[index];
+				if (building.count === 0) {
+					continue;
+				}
+
+				var costThisTick = (building.maintenance * building.count) / 60;
+
+				resourceService.removeResource(0, costThisTick);
+			}
+		}
+
 		$scope.update = function() {
 			$scope.produceResources();
+			$scope.buildingMaintenance();
 
 			$timeout($scope.update, 1000);
 		}
@@ -113,12 +137,13 @@
 	});
 	
 	app.service('buildingService', function() {
-		this.buildings = [
+		this.productionBuildings = [
 			{
 				name: 'Fisherman\'s Hut',
 				description: 'Produces fish',
 				count: 0,
 				cost: { 'Gold':100, 'Wood':3, 'Tools':2 },
+				maintenance: 15,
 				produces: 'Fish',
 				outputTime: 30,
 				progress: 0
@@ -128,6 +153,7 @@
 				description: 'Produces trees',
 				count: 0,
 				cost: { 'Gold':50, 'Tools':2 },
+				maintenance: 5,
 				produces: 'Wood',
 				outputTime: 40,
 				progress: 0
@@ -143,8 +169,8 @@
 
 			this.indexMap = {};
 
-			for (var index = 0; index < this.buildings.length; index++) {
-				this.indexMap[this.buildings[index].name] = index;
+			for (var index = 0; index < this.productionBuildings.length; index++) {
+				this.indexMap[this.productionBuildings[index].name] = index;
 			}
 		}
 
