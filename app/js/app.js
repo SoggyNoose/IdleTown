@@ -177,4 +177,33 @@
 		this.createIndexMap();
 	});
 
+	app.service('populationService', function() {
+		this.houses = [
+			{
+				name: "Peasant Home",
+				count: 0,
+				cost: { 'Wood':2 },
+				capacity: 8
+			},
+			{
+				name: "Citizen Home",
+				count: 0,
+				cost: { 'Wood':1, 'Tools':1 },
+				capacity: 15
+			},
+			{
+				name: "Patrician Home",
+				count: 0,
+				cost: { 'Stone':4, 'Wood':1, 'Tools':1 },
+				capacity: 25
+			},
+			{
+				name: "Nobleman Home",
+				count: 0,
+				cost: { 'Glass':3, 'Stone':3, 'Wood':1, 'Tools':1 },
+				capacity: 40
+			}
+		];
+	})
+
 })();
