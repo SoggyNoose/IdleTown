@@ -25,7 +25,7 @@
           <h4>Occidental Resources</h4>
           <div ng-repeat="resource in resourceCtrl.resources">
             {{resource.name}}
-            <em>{{resource.count}}</em>
+            <em>{{resource.count | number : 0}}</em>
           </div>
         </div>
       </div>
