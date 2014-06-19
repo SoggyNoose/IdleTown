@@ -28,6 +28,17 @@
 			this.productionBuildings[buildingIndex].count++;
 		}
 
+		this.destroyBuilding = function(building) {
+			console.log("Destroying a " + building.name);
+			var buildingIndex = buildingService.indexMap[building.name];
+
+			this.productionBuildings[buildingIndex].count--;
+
+			if (this.productionBuildings[buildingIndex].count === 0) {
+				this.productionBuildings[buildingIndex].progress = 0;
+			}
+		}
+
 		this.costAsString = function(building) {
 			var result = "";
 			for (var type in building.cost) {
