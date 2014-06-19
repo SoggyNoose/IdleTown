@@ -26,16 +26,15 @@
 		}
 
 		$scope.buildingMaintenance = function() {
+			var totalMaintenance = 0;
 			for (var index = 0; index < buildingService.productionBuildings.length; index++) {
 				var building = buildingService.productionBuildings[index];
-				if (building.count === 0) {
-					continue;
-				}
-
-				var costThisTick = (building.maintenance * building.count) / 60;
-
-				resourceService.removeResource(0, costThisTick);
+				totalMaintenance += building.maintenance * building.count;
 			}
+
+			var costThisTick = (totalMaintenance) / 60;
+
+			resourceService.removeResource(0, costThisTick);
 		}
 
 		$scope.update = function() {
