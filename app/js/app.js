@@ -38,6 +38,10 @@
 			}
 		}
 
+		this.getResource = function(resourceName) {
+			return this.resources[this.indexMap[resourceName]];
+		}
+
 		this.createIndexMap();
 
 		this.addResource = function(idx, amt) {
@@ -85,6 +89,10 @@
 			for (var index = 0; index < this.productionBuildings.length; index++) {
 				this.indexMap[this.productionBuildings[index].name] = index;
 			}
+		}
+
+		this.getBuilding = function(buildingName) {
+			return this.productionBuildings[this.indexMap[buildingName]];
 		}
 
 		this.createIndexMap();
