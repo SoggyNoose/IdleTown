@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="clickTrade" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="clickTrade" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="clickTrade" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="clickTrade" class="no-js"> <!--<![endif]-->
-<head ng-app="clickTrade">
+<!--[if lt IE 7]>      <html lang="en" ng-app="idleTown" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="idleTown" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="idleTown" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="idleTown" class="no-js"> <!--<![endif]-->
+<head ng-app="idleTown">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My AngularJS App</title>
@@ -20,7 +20,7 @@
     <h1>This Game</h1>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div ng-controller="ResourceController as resourceCtrl">
           <h4>Occidental Resources</h4>
           <div ng-repeat="resource in resourceCtrl.resources">
@@ -29,8 +29,22 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <h4>Oriental Resources</h4>
+      </div>
+      <div class="col-md-4" ng-controller="PopulationController as populationCtrl">
+        <h4>Population</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Houses</h3>
+        <div ng-controller="PopulationController as housingCtrl">
+          <div ng-repeat="house in housingCtrl.houses">
+            {{house.name}} - {{house.count}}
+          </div>
+        </div>
       </div>
     </div>
 
@@ -58,5 +72,9 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/resource-controller.js"></script>
+  <script src="js/building-controller.js"></script>
+  <script src="js/population-controller.js"></script>
+  <script src="js/game-loop-controller.js"></script>
 </body>
 </html>
