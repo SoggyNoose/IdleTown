@@ -29,6 +29,10 @@
 
 			this.houses[0].count++;
 		}
+
+		this.getTotalCapacity = function(popName) {
+			return populationService.getTotalCapacity(popName);
+		}
 	}]);
 
 })();

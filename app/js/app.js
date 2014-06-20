@@ -102,7 +102,7 @@
 		this.houses = [
 			{
 				name: "Peasant Home",
-				count: 0,
+				count: 1,
 				cost: { 'Wood':2 },
 				capacity: 8
 			},
@@ -129,7 +129,7 @@
 		this.population = [
 			{
 				name: "Peasant",
-				count: 0,
+				count: 1,
 				taxRate: 1
 			},
 			{
@@ -148,6 +148,54 @@
 				taxRate: 50
 			}
 		];
+
+		this.baseRepopulationRate = .10;
+
+		this.indexMap = null;
+
+		this.createIndexMap = function() {
+			if (this.indexMap) {
+				return;
+			}
+
+			this.indexMap = {};
+
+			for (var index = 0; index < this.population.length; index++) {
+				this.indexMap[this.population[index].name] = index;
+			}
+		}
+
+		this.createIndexMap();
+
+		this.getHouse = function(peopleName) {
+			return this.houses[this.indexMap[peopleName]];
+		}
+
+		this.getPeople = function(peopleName) {
+			return this.population[this.indexMap[peopleName]];
+		}
+
+		this.getTotalCapacity = function(populationType) {
+			var house = this.getHouse(populationType);
+			return house.capacity * house.count;
+		}
+
+		this.adjustPopulation = function() {
+			for (var index=0; index<this.population.length; index++) {
+				var people = this.population[index];
+				if (people.count >= this.getTotalCapacity(people.name)) {
+					continue;
+				}
+
+				var roll = Math.random();
+				if (roll < this.baseRepopulationRate) {
+					console.log("A " + people.name + " has moved in");
+					people.count++;
+				} else {
+					console.debug("Attempted to move in " + people.name + " got: " + roll)
+				}
+			}
+		}
 	})
 
 })();

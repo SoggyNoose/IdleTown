@@ -37,7 +37,7 @@
         <h4>Population</h4>
         <div ng-repeat="people in populationCtrl.population">
           {{people.name}}
-          <em>{{people.count}}</em>
+          <em>{{people.count}}/{{populationCtrl.getTotalCapacity(people.name)}}</em>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 (function() {
 	var app = angular.module('idleTown');
 
-	app.controller('GameLoopController', ['$scope', '$timeout', 'resourceService', 'buildingService', function($scope, $timeout, resourceService, buildingService) {
+	app.controller('GameLoopController', ['$scope', '$timeout', 'resourceService', 'buildingService', 'populationService', function($scope, $timeout, resourceService, buildingService, populationService) {
 		
 		$scope.produceResources = function() {
 			for (var index = 0; index < buildingService.productionBuildings.length; index++) {
@@ -37,9 +37,13 @@
 			resourceService.removeResource(0, costThisTick);
 		}
 
+
+
 		$scope.update = function() {
 			$scope.produceResources();
 			$scope.buildingMaintenance();
+
+			populationService.adjustPopulation();
 
 			$timeout($scope.update, 1000);
 		}
