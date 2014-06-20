@@ -49,7 +49,17 @@
 			resourceService.addResource(0, taxThisTick);
 		}
 
+		$scope.consumeResources = function() {
+			for (var index=0; index<populationService.population.length; index++) {
+				var people = populationService.population[index];
 
+				for (var resource in people.consumptionRate) {
+					var totalConsumed = people.consumptionRate[resource] * people.count;
+					totalConsumed /= 600;
+					resourceService.removeResource(resourceService.indexMap[resource], totalConsumed);
+				}
+			}
+		}
 
 		$scope.update = function() {
 			$scope.produceResources();
@@ -57,6 +67,8 @@
 
 			populationService.adjustPopulation();
 			$scope.collectTaxes();
+
+			$scope.consumeResources();
 
 			$timeout($scope.update, 1000);
 		}

@@ -33,22 +33,26 @@
 			{
 				name: "Peasant",
 				count: 1,
-				taxRate: 1
+				taxRate: 1,
+				consumptionRate: {'Fish':1, 'Cider':0.44}
 			},
 			{
 				name: "Citizen",
 				count: 0,
-				taxRate: 5
+				taxRate: 5,
+				consumptionRate: {}
 			},
 			{
 				name: "Patrician",
 				count: 0,
-				taxRate: 20
+				taxRate: 20,
+				consumptionRate: {}
 			},
 			{
 				name: "Nobleman",
 				count: 0,
-				taxRate: 50
+				taxRate: 50,
+				consumptionRate: {}
 			}
 		];
 
