@@ -149,7 +149,7 @@
 			}
 		];
 
-		this.baseRepopulationRate = .10;
+		this.baseRepopulationRate = .05;
 
 		this.indexMap = null;
 
@@ -192,7 +192,7 @@
 					console.log("A " + people.name + " has moved in");
 					people.count++;
 				} else {
-					console.debug("Attempted to move in " + people.name + " got: " + roll)
+					// console.debug("Attempted to move in " + people.name + " got: " + roll)
 				}
 			}
 		}

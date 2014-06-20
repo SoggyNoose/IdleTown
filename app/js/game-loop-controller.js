@@ -37,6 +37,18 @@
 			resourceService.removeResource(0, costThisTick);
 		}
 
+		$scope.collectTaxes = function() {
+			var totalTax = 0;
+			for (var index=0; index<populationService.population.length; index++) {
+				var people = populationService.population[index];
+				totalTax += people.taxRate * people.count;
+			}
+
+			var taxThisTick = totalTax / 60;
+
+			resourceService.addResource(0, taxThisTick);
+		}
+
 
 
 		$scope.update = function() {
@@ -44,6 +56,7 @@
 			$scope.buildingMaintenance();
 
 			populationService.adjustPopulation();
+			$scope.collectTaxes();
 
 			$timeout($scope.update, 1000);
 		}
